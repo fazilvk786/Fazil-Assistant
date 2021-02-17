@@ -15,13 +15,13 @@ const menu = require("./lib/menu.js")
 
 const apivhtear = 'Apikey vhtear';
 const apibarbar = 'Apikey mhankbarbar';
-const BotName = 'Nama bot'; 
-const instagram = 'Instagram kamu'; 
-const aktif = 'Kapan bot aktif';
+const BotName = 'Bot Name'; 
+const instagram = 'Your Instagram'; 
+const aktif = 'When is the bot active';
 const vcard = 'BEGIN:VCARD\n' // metadata of the contact card
             + 'VERSION:3.0\n' 
-            + 'FN:Nama kamu\n' // Nama kamu
-            + 'ORG:Nama bot;\n' // Nama bot
+            + 'FN:Your name\n' // Nama kamu
+            + 'ORG:Bot name;\n' // Nama bot
             + 'TEL;type=CELL;type=VOICE;waid=6280000000000:+62 000-0000-0000\n' //Nomor whatsapp kamu
             + 'END:VCARD'
 const
@@ -59,7 +59,7 @@ conn.on('qr', qr =>
    {
       small: true
    });
-   console.log(`[ ${moment().format("HH:mm:ss")} ] Scan kode qr dengan whatsapp!`);
+   console.log(`[ ${moment().format("HH:mm:ss")} ] Scan the QR code with WhatsApp!`);
 });
 
 conn.on('credentials-updated', () =>
@@ -90,110 +90,111 @@ conn.on('message-new', async(m) =>
    let imageMessage = m.message.imageMessage;
    console.log(`[ ${moment().format("HH:mm:ss")} ] => Nomor: [ ${id.split("@s.whatsapp.net")[0]} ] => ${text}`);
 
-//fitur
+//features
 if (text.includes('.Seberapabucin')){
-conn.sendMessage(id, 'Silakan ulangi command dengan huruf kecil',MessageType.text, { quoted: m } );
+conn.sendMessage(id, 'Please repeat the command in lowercase',MessageType.text, { quoted: m } );
 }
 if (text.includes(".seberapabucin")){
 const teks = text.replace(/.seberapabucin /, "")
 axios.get(`https://arugaz.herokuapp.com/api/howbucins`).then((res) => {
-    let hasil = `*Bucin Detected*\n*Persentase* : ${res.data.persen}% \n_${res.data.desc}_ `;
+    let hasil = `*Bucin Detected*\n*Persentage* : ${res.data.persen}% \n_${res.data.desc}_ `;
     conn.sendMessage(id, hasil ,MessageType.text, { quoted: m } );
 })
 }
 //kerang ajaib
 if (text.includes('.Apakah')){
-conn.sendMessage(id, 'Silakan ulangi command dengan huruf kecil\n_contoh : .apakah aku cantik_',MessageType.text, {quoted: m});
+conn.sendMessage(id, 'Please repeat the command in lowercase\n_example : .apakah i am beautiful_',MessageType.text, {quoted: m});
 }
 if (text.includes('.Bolehkah')){
-conn.sendMessage(id, 'Silakan ulangi command dengan huruf kecil\n_contoh : .bolehkah aku mencintai dia_',MessageType.text, {quoted: m});
+conn.sendMessage(id, 'Please repeat the command in lowercase\n_eg : .bolehkah i love her_',MessageType.text, {quoted: m});
 }
 if (text.includes('.Kapan')){
-conn.sendMessage(id, 'Silakan ulangi command dengan huruf kecil\n_contoh : .kapan aku kaya_',MessageType.text, {quoted: m});
+conn.sendMessage(id, 'Please repeat the command in lowercase\n_eg : .kapan i am rich',MessageType.text, {quoted: m});
 }
 if (text.includes('.apakah')){
 const teks = text.replace(/./, '')
 const truth =[
-'Iya',
-'Tidak',
-'Bisa Jadi',
-'Coba tanyakan lagi',
-'Mungkin',
+'Yes',
+'Not',
+'Can be',
+'Try asking again',
+'Maybe',
 '']
 const ttrth = truth[Math.floor(Math.random() * truth.length)]
-conn.sendMessage(id, 'Pertanyaan : *'+teks+'*\n\nJawaban : '+ ttrth, MessageType.text, { quoted: m })
+conn.sendMessage(id, 'Question : *'+text+'*\n\nAnswer : '+ ttrth, MessageType.text, { quoted: m })
 }
 
 if (text.includes('.bolehkah')){
 const teks = text.replace(/./, '')
 const truth =[
-'Boleh',
-'Tidak boleh',
-'Sangat di anjurkan',
-'Coba tanyakan lagi',
-'Tidak',
-'Mungkin',
-'Jangan']
+'Yes',
+'Can't',
+'Highly recommended',
+'Try asking again',
+'No',
+'Maybe',
+'Do not',
+'']
 const ttrth = truth[Math.floor(Math.random() * truth.length)]
-conn.sendMessage(id, 'Pertanyaan : *'+teks+'*\n\nJawaban : '+ ttrth, MessageType.text, { quoted: m })
+conn.sendMessage(id, 'Question : *'+text+'*\n\nAnswer : '+ ttrth, MessageType.text, { quoted: m })
 }
 
 
 if (text.includes('.kapan')){
 const teks = text.replace(/./, '')
 const truth =[
-'1 Hari lagi',
-'2 hari lagi',
-'3 hari lagi',
-'4 hari lagi',
-'5 hari lagi',
-'6 hari lagi',
-'1 minggu lagi',
-'2 minggu lagi',
-'3 minggu lagi',
-'1 bulan lagi',
-'2 bulan lagi',
-'3 hari lagi',
-'4 bulan lagi',
-'5 bulan lagi',
-'6 hari lagi',
-'7 bulan lagi',
-'8 bulan lagi',
-'9 hari lagi',
-'10 bulan lagi',
-'11 bulan lagi',
-'1 tahun lagi',
-'2 tahun lagi',
-'3 tahun lagi',
-'4 tahun lagi',
-'Tidak akan',
-'Yakin bakal terjadi ?',
-'Aku meragukan nya',
-'Lusa',
-'Akhir bulan depan',
-'Awal bulan depan',
-'Tahun depan',
-'Bulan depan',
-'Sebentar lagi',
+'1 more day',
+'2 more days',
+'3 more days',
+'4 more days',
+'5 more days',
+'6 more days',
+'1 more week',
+'2 weeks more',
+'3 weeks to go',
+'1 month longer',
+'2 more months',
+'3 more days',
+'4 months to go',
+'5 months to go',
+'6 more days',
+'7 months to go',
+'8 months to go',
+'9 more days',
+'10 months to go ',
+'11 months to go ',
+'1 more year',
+'2 more years',
+'3 more years',
+'4 more years',
+'Will not',
+'Are you sure it will happen?',
+'I doubt it',
+'The day after tomorrow',
+'End of next month',
+'Early next month',
+'Next year',
+'Next month',
+'Soon',
 '']
 const ttrth = truth[Math.floor(Math.random() * truth.length)]
-conn.sendMessage(id, 'Pertanyaan : *'+teks+'*\n\nJawaban : '+ ttrth, MessageType.text, { quoted: m })
+conn.sendMessage(id, 'Question : *'+text+'*\n\nAnswer : '+ ttrth, MessageType.text, { quoted: m })
 }
   //Zodiak
 if (text.includes('.Zodiak')){
-conn.sendMessage(id, 'Silakan ulangi command dengan huruf kecil',MessageType.text, { quoted: m } );
+conn.sendMessage(id, 'Please repeat the command in lowercase',MessageType.text, { quoted: m } );
 }
 if (text.includes(".zodiak")){
 const teks = text.replace(/.zodiak /, "")
 axios.get(`https://api.vhtear.com/zodiak?query=${teks}&apikey=${apivhtear}`).then((res) => {
-    let hasil = `*Zodiak* : ${res.data.result.zodiak}\n*Ramalan hari ini* :\n${res.data.result.ramalan}\n\n_${res.data.result.inspirasi}_`;
+    let hasil = `*Zodiak* : ${res.data.result.zodiak}\n*Today-s forecast* :\n${res.data.result.ramalan}\n\n_${res.data.result.inspirasi}_`;
     conn.sendMessage(id, hasil ,MessageType.text, { quoted: m } );
 })
 }
 
   //Tebakgambar
 if (text.includes('.Tebakgambar')){
-conn.sendMessage(id, 'Silakan ulangi command dengan huruf kecil',MessageType.text, { quoted: m } );
+conn.sendMessage(id, 'Please repeat the command in lowercase',MessageType.text, { quoted: m } );
 }
 if (text.includes(".tebakgambar")){
 axios.get(`https://api.vhtear.com/tebakgambar&apikey=${apivhtear}`).then((res) => {
@@ -209,7 +210,7 @@ axios.get(`https://api.vhtear.com/tebakgambar&apikey=${apivhtear}`).then((res) =
 
   //Familly100
 if (text.includes('.Family100')){
-conn.sendMessage(id, 'Silakan ulangi command dengan huruf kecil',MessageType.text, { quoted: m } );
+conn.sendMessage(id, 'Please repeat the command in lowercase',MessageType.text, { quoted: m } );
 }
 if (text.includes(".family100")){
 axios.get(`https://api.vhtear.com/family100&apikey=${apivhtear}`).then((res) => {
@@ -220,7 +221,7 @@ axios.get(`https://api.vhtear.com/family100&apikey=${apivhtear}`).then((res) => 
 
   //Artimimpi
 if (text.includes('.Mimpi')){
-conn.sendMessage(id, 'Silakan ulangi command dengan huruf kecil',MessageType.text, { quoted: m } );
+conn.sendMessage(id, 'Please repeat the command in lowercase',MessageType.text, { quoted: m } );
 }
 if (text.includes(".mimpi")){
 const teks = text.replace(/.mimpi /, "")
@@ -232,7 +233,7 @@ axios.get(`https://api.vhtear.com/artimimpi?query=${teks}&apikey=${apivhtear}`).
 
  //Brainly 
 if (text.includes('.Brainly')){
-conn.sendMessage(id, 'Silakan ulangi command dengan huruf kecil',MessageType.text, { quoted: m } );
+conn.sendMessage(id, 'Please repeat the command in lowercase',MessageType.text, { quoted: m } );
 }
 if (text.includes('.brainly')){
 const teks = text.replace(/.brainly /, "")
@@ -243,7 +244,7 @@ axios.get(`https://api.vhtear.com/branly?query=${teks}&apikey=${apivhtear}`).the
 }
   //How gay
 if (text.includes('.Seberapagay')){
-conn.sendMessage(id, 'Silakan ulangi command dengan huruf kecil',MessageType.text, { quoted: m } );
+conn.sendMessage(id, 'Please repeat the command in lowercase',MessageType.text, { quoted: m } );
 }
 if (text.includes(".seberapagay")){
 const teks = text.replace(/.seberapagay /, "")
@@ -255,7 +256,7 @@ axios.get(`https://arugaz.herokuapp.com/api/howgay`).then((res) => {
 
  //Info owner
 if (text.includes('.Owner')){
-conn.sendMessage(id, 'Silakan ulangi command dengan huruf kecil',MessageType.text, { quoted: m } );
+conn.sendMessage(id, 'Please repeat the command in lowercase',MessageType.text, { quoted: m } );
 }
 if (text.includes('.owner')){
 conn.sendMessage(id, {displayname: "Jeff", vcard: vcard}, MessageType.contact, { quoted: m } )
@@ -263,7 +264,7 @@ conn.sendMessage(id, {displayname: "Jeff", vcard: vcard}, MessageType.contact, {
 
   //Ganti nama grup
 if (text.includes('.Setname')){
-conn.sendMessage(id, 'Silakan ulangi command dengan huruf kecil',MessageType.text, { quoted: m } );
+conn.sendMessage(id, 'Please repeat the command in lowercase',MessageType.text, { quoted: m } );
 }
 if (text.includes(".setname")){
 const teks = text.replace(/.setname /, "")
@@ -276,7 +277,7 @@ conn.sendMessage(id, 'Sukses mengganti Nama Group' ,MessageType.text, { quoted: 
 
   //Ganti deskripsi grup
 if (text.includes('.Setdesc')){
-conn.sendMessage(id, 'Silakan ulangi command dengan huruf kecil',MessageType.text, { quoted: m } );
+conn.sendMessage(id, 'Please repeat the command in lowercase',MessageType.text, { quoted: m } );
 }
 if (text.includes(".setdesc")){
 const teks = text.replace(/.setdesc /, "")
@@ -289,7 +290,7 @@ conn.sendMessage(id, 'Sukses mengganti deskripsi grup' ,MessageType.text, { quot
 
 //buka gc
 if (text.includes('.Opengc')){
-conn.sendMessage(id, 'Silakan ulangi command dengan huruf kecil',MessageType.text, { quoted: m } );
+conn.sendMessage(id, 'Please repeat the command in lowercase',MessageType.text, { quoted: m } );
 }
 else if (text == '.opengc'){
 let hasil = `${id.split("@s.whatsapp.net")[0]}`;
@@ -299,7 +300,7 @@ conn.sendMessage(id, 'Hai' ,MessageType.text);
 
 //tutup gc
 if (text.includes('.Closegc')){
-conn.sendMessage(id, 'Silakan ulangi command dengan huruf kecil',MessageType.text, { quoted: m } );
+conn.sendMessage(id, 'Please repeat the command in lowercase',MessageType.text, { quoted: m } );
 
 }
 else if (text == '.closegc'){
@@ -311,7 +312,7 @@ conn.sendMessage(id, 'Done, Tutup dulu yah' ,MessageType.text);
 
   //Map
 if (text.includes('.Map')){
-conn.sendMessage(id, 'Silakan ulangi command dengan huruf kecil',MessageType.text, { quoted: m } );
+conn.sendMessage(id, 'Please repeat the command in lowercase',MessageType.text, { quoted: m } );
 }
 if (text.includes('.map')){
   var teks = text.replace(/.map /, '')
@@ -329,7 +330,7 @@ if (text.includes('.map')){
 
   //Tag
 if (text.includes('.Tagme')){
-conn.sendMessage(id, 'Silakan ulangi command dengan huruf kecil',MessageType.text, { quoted: m } );
+conn.sendMessage(id, 'Please repeat the command in lowercase',MessageType.text, { quoted: m } );
 }
 if (text.includes('.tagme')) {
  var nomor = m.participant
@@ -342,7 +343,7 @@ if (text.includes('.tagme')) {
 
   //Get ping
 if (text.includes('.Ping')){
-conn.sendMessage(id, 'Silakan ulangi command dengan huruf kecil',MessageType.text, { quoted: m } );
+conn.sendMessage(id, 'Please repeat the command in lowercase',MessageType.text, { quoted: m } );
 }
 else if (text == '.ping') {
 const timestamp = speed();
@@ -352,7 +353,7 @@ conn.sendMessage(id, `PONG!!\n_Speed : ${latensi.toFixed(4)} Second_`, MessageTy
 
   //Nulis dibuku
 if (text.includes('.Nulis')){
-conn.sendMessage(id, 'Silakan ulangi command dengan huruf kecil',MessageType.text, { quoted: m } );
+conn.sendMessage(id, 'Please repeat the command in lowercase',MessageType.text, { quoted: m } );
 }
 if (text.includes('.nulis')){
   const teks = text.replace(/.nulis /, '')
@@ -369,7 +370,7 @@ if (text.includes('.nulis')){
 }
   //Pengucapan ulang
 if (text.includes('.Say')){
-conn.sendMessage(id, 'Silakan ulangi command dengan huruf kecil',MessageType.text, { quoted: m } );
+conn.sendMessage(id, 'Please repeat the command in lowercase',MessageType.text, { quoted: m } );
 }
 if (text.includes(".say")){
   const teks = text.replace(/.say /, "")
@@ -377,7 +378,7 @@ conn.sendMessage(id, teks, MessageType.text)
 }
   //Youtube download 
 if (text.includes('.Ytmp4')){
-conn.sendMessage(id, 'Silakan ulangi command dengan huruf kecil',MessageType.text, { quoted: m } );
+conn.sendMessage(id, 'Please repeat the command in lowercase',MessageType.text, { quoted: m } );
 }
 if (text.includes('.ytmp4')){
 const teks = text.replace(/.ytmp4 /, "")
@@ -389,7 +390,7 @@ axios.get(`https://st4rz.herokuapp.com/api/ytv?url=${teks}`).then((res) => {
 }
 
 if (text.includes('.Ytmp3')){
-conn.sendMessage(id, 'Silakan ulangi command dengan huruf kecil',MessageType.text, { quoted: m } );
+conn.sendMessage(id, 'Please repeat the command in lowercase',MessageType.text, { quoted: m } );
 }
 if (text.includes('.ytmp3')){
 const teks = text.replace(/.ytmp3 /, "")
@@ -402,7 +403,7 @@ axios.get(`https://st4rz.herokuapp.com/api/yta?url=${teks}`).then((res) => {
 
   //Instagram download
 if (text.includes('.Ig')){
-conn.sendMessage(id, 'Silakan ulangi command dengan huruf kecil',MessageType.text, { quoted: m } );
+conn.sendMessage(id, 'Please repeat the command in lowercase',MessageType.text, { quoted: m } );
 }
 if (text.includes('.ig')){
 const teks = text.replace(/.ig /, "")
@@ -415,7 +416,7 @@ axios.get(`https://mhankbarbars.herokuapp.com/api/ig?url=${teks}&apiKey=${apibar
 
   //Facebook download
 if (text.includes('.Fb')){
-conn.sendMessage(id, 'Silakan ulangi command dengan huruf kecil',MessageType.text, { quoted: m } );
+conn.sendMessage(id, 'Please repeat the command in lowercase',MessageType.text, { quoted: m } );
 }
 if (text.includes('.fb')){
 const teks = text.replace(/.fb /, "")
@@ -428,7 +429,7 @@ axios.get(`https://api.vhtear.com/fbdl?link=${teks}&apikey=${apivhtear}`).then((
 
   //Twitter download
 if (text.includes('.Twt')){
-conn.sendMessage(id, 'Silakan ulangi command dengan huruf kecil',MessageType.text, { quoted: m } );
+conn.sendMessage(id, 'Please repeat the command in lowercase',MessageType.text, { quoted: m } );
 }
 if (text.includes('.twt')){
 const teks = text.replace(/.twt /, "")
@@ -441,7 +442,7 @@ axios.get(`https://mhankbarbars.herokuapp.com/api/twit?url=${teks}&apiKey=${apib
 
   //Pencarian wiki
 if (text.includes('.Wiki')){
-conn.sendMessage(id, 'Silakan ulangi command dengan huruf kecil',MessageType.text, { quoted: m } );
+conn.sendMessage(id, 'Please repeat the command in lowercase',MessageType.text, { quoted: m } );
 }
 if (text.includes(".wiki")){
 const teks = text.replace(/.wiki /, "")
@@ -454,7 +455,7 @@ axios.get(`https://alfians-api.herokuapp.com/api/wiki?q=${teks}`).then((res) => 
 
   //Jadwan sholat daerah
 if (text.includes('.Sholat')){
-conn.sendMessage(id, 'Silakan ulangi command dengan huruf kecil',MessageType.text, { quoted: m } );
+conn.sendMessage(id, 'Please repeat the command in lowercase',MessageType.text, { quoted: m } );
 }
 if (text.includes(".sholat")){
   const teks = text.replace(/.sholat /, "")
@@ -538,7 +539,7 @@ if (text.includes(".sholat")){
 
   //Info convid
 if (text.includes('.Covid')){
-conn.sendMessage(id, 'Silakan ulangi command dengan huruf kecil',MessageType.text, { quoted: m } );
+conn.sendMessage(id, 'Please repeat the command in lowercase',MessageType.text, { quoted: m } );
 }
 if (text.includes(".covid"))
    {
@@ -555,7 +556,7 @@ const get = require('got')
 
   //Random foto cewe
 if (text.includes('.Cecan')){
-conn.sendMessage(id, 'Silakan ulangi command dengan huruf kecil',MessageType.text, { quoted: m } );
+conn.sendMessage(id, 'Please repeat the command in lowercase',MessageType.text, { quoted: m } );
 }
    if (text.includes(".cecan"))
    {
@@ -587,7 +588,7 @@ conn.sendMessage(id, 'Silakan ulangi command dengan huruf kecil',MessageType.tex
 
   //Random foto cowo
 if (text.includes('.Cogan')){
-conn.sendMessage(id, 'Silakan ulangi command dengan huruf kecil',MessageType.text, { quoted: m } );
+conn.sendMessage(id, 'Please repeat the command in lowercase',MessageType.text, { quoted: m } );
 }
    if (text.includes(".cogan"))
    {
@@ -649,7 +650,7 @@ if (text.includes(".anime"))
 
   //Pencarian lirik
 if (text.includes('.Lirik')){
-conn.sendMessage(id, 'Silakan ulangi command dengan huruf kecil',MessageType.text, { quoted: m } );
+conn.sendMessage(id, 'Please repeat the command in lowercase',MessageType.text, { quoted: m } );
 }
 if (text.includes(".lirik")){
 	const teks = text.split(".lirik")[1]
@@ -661,7 +662,7 @@ if (text.includes(".lirik")){
 }
   //Font bapack
 if (text.includes('.Alay')){
-conn.sendMessage(id, 'Silakan ulangi command dengan huruf kecil',MessageType.text, { quoted: m } );
+conn.sendMessage(id, 'Please repeat the command in lowercase',MessageType.text, { quoted: m } );
 }
 if (text.includes(".alay")){
 	const alay = text.split(".alay")[1]
@@ -673,7 +674,7 @@ if (text.includes(".alay")){
 
   //Random memme
 if (text.includes('.Meme')){
-conn.sendMessage(id, 'Silakan ulangi command dengan huruf kecil',MessageType.text, { quoted: m } );
+conn.sendMessage(id, 'Please repeat the command in lowercase',MessageType.text, { quoted: m } );
 }
 if (text.includes(".meme"))
    {
@@ -703,7 +704,7 @@ if (text.includes(".meme"))
 
   //Random wallpaper
 if (text.includes('.Wp')){
-conn.sendMessage(id, 'Silakan ulangi command dengan huruf kecil',MessageType.text, { quoted: m } );
+conn.sendMessage(id, 'Please repeat the command in lowercase',MessageType.text, { quoted: m } );
 }
 if (text.includes(".wp"))
    {
@@ -1246,21 +1247,21 @@ switch(hari) {
  case 6: hari = "Sabtu"; break;
 }
 switch(bulan) {
- case 0: bulan = "Januari"; break;
- case 1: bulan = "Februari"; break;
- case 2: bulan = "Maret"; break;
- case 3: bulan = "April"; break;
- case 4: bulan = "Mei"; break;
- case 5: bulan = "Juni"; break;
- case 6: bulan = "Juli"; break;
- case 7: bulan = "Agustus"; break;
+ case 0: month = "Januari"; break;
+ case 1: month = "Februari"; break;
+ case 2: month = "March"; break;
+ case 3: month = "April"; break;
+ case 4: month = "May"; break;
+ case 5: bulan = "June"; break;
+ case 6: bulan = "July"; break;
+ case 7: bulan = "Agust"; break;
  case 8: bulan = "September"; break;
- case 9: bulan = "Oktober"; break;
+ case 9: bulan = "October"; break;
  case 10: bulan = "November"; break;
- case 11: bulan = "Desember"; break;
+ case 11: bulan = "December"; break;
 }
-var tampilTanggal = "TANGGAL: " + hari + ", " + tanggal + " " + bulan + " " + tahun;
-var tampilWaktu = "JAM: " + jam + ":" + menit + ":" + detik;
+var tampilTanggal = "DATE: " + day + ", " + date + " " + month + " " + year;
+var tampilWaktu = "TIME: " + hrs + ":" + minute + ":" + second;
 conn.sendMessage(id, menu.menu(id, BotName, corohelp, tampilTanggal, tampilWaktu, instagram, aktif) ,MessageType.text);
 }
 
@@ -1276,7 +1277,7 @@ if (text.includes('.chatprank')){
 
   //Al-Qur'an
 if (text.includes('.Alquran')){
-conn.sendMessage(id, 'Silakan ulangi command dengan huruf kecil\n_contoh : .alquran 1_',MessageType.text, {quoted: m});
+conn.sendMessage(id, 'Please repeat the command in lowercase\n_contoh : .alquran 1_',MessageType.text, {quoted: m});
 }
 if (text.includes(".alquran")){
 const teks = text.replace(/.alquran /, "")
@@ -1288,7 +1289,7 @@ axios.get(`https://api.vhtear.com/quran?no=${teks}&apikey=${apivhtear}`).then((r
 
   //Gombalan
 if (text.includes('.Gombal')){
-conn.sendMessage(id, 'Silakan ulangi command dengan huruf kecil',MessageType.text, {quoted: m});
+conn.sendMessage(id, 'Please repeat the command in lowercase',MessageType.text, {quoted: m});
 }
 if (messageType === MessageType.text)
    {
@@ -1310,7 +1311,7 @@ if (messageType === MessageType.text)
 
  //Receh
 if (text.includes('.Receh')){
-conn.sendMessage(id, 'Silakan ulangi command dengan huruf kecil',MessageType.text, {quoted: m});
+conn.sendMessage(id, 'Please repeat the command in lowercase',MessageType.text, {quoted: m});
 }
 if (messageType === MessageType.text)
    {
@@ -1331,7 +1332,7 @@ if (messageType === MessageType.text)
 
   //truth
 if (text.includes('.Truth')){
-conn.sendMessage(id, 'Silakan ulangi command dengan huruf kecil',MessageType.text, {quoted: m});
+conn.sendMessage(id, 'Please repeat the command in lowercase',MessageType.text, {quoted: m});
 }
 if (messageType === MessageType.text)
    {
@@ -1352,7 +1353,7 @@ if (messageType === MessageType.text)
 
   //dare
 if (text.includes('.Dare')){
-conn.sendMessage(id, 'Silakan ulangi command dengan huruf kecil',MessageType.text, {quoted: m});
+conn.sendMessage(id, 'please command in lower case',MessageType.text, {quoted: m});
 }
 if (messageType === MessageType.text)
    {
@@ -1373,7 +1374,7 @@ if (messageType === MessageType.text)
   
   //status bapack
 if (text.includes('.Statpack')){
-conn.sendMessage(id, 'Silakan ulangi command dengan huruf kecil',MessageType.text, {quoted: m});
+conn.sendMessage(id, 'pls commands in lower case',MessageType.text, {quoted: m});
 }
 if (messageType === MessageType.text)
    {
@@ -1395,20 +1396,20 @@ if (messageType === MessageType.text)
 
 //tod
 if (text.includes('.Tod')){
-conn.sendMessage(id, 'Silakan ulangi command dengan huruf kecil',MessageType.text, {quoted: m});
+conn.sendMessage(id, 'Please repeat the command in lowercase',MessageType.text, {quoted: m});
 }
 if (text.includes('.tod')){
-conn.sendMessage(id, `Sebelum bermain berjanjilah akan melaksanakan apapun perintah yang di berikan. 
+conn.sendMessage(id, `Before playing promise to carry out any command given. 
 
-Silakan pilih :
+Please select :
 
 *.Truth*
 *.Dare*
 
-*Selesaikan perintah untuk melakukan TOD selanjutnya* ⚠️` ,MessageType.text, {quoted: m});
+*Complete the command to perform the next TOD* ⚠️` ,MessageType.text, {quoted: m});
 }
 
 //Hay gay
-//create @mrf.zvx don't delate this please
+//create @fazilvk786 don't delate this please
 	
 })
